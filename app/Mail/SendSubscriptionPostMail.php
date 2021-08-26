@@ -11,11 +11,13 @@ class SendSubscriptionPostMail extends Mailable
     use Queueable, SerializesModels;
 
     public $post;
+    public $email;
 
 
-    public function __construct($post)
+    public function __construct($post, $email)
     {
         $this->post = $post;
+        $this->email = $email;
     }
 
 

@@ -22,6 +22,6 @@ class SendSubscriptionPostEmailFired
 
     public function handle(SendSubscriptionPostEmail $event)
     {
-        Mail::to($event->email)->queue(new SendSubscriptionPostMail($event->post));
+        Mail::to($event->email)->queue(new SendSubscriptionPostMail($event->post, $event->email));
     }
 }
