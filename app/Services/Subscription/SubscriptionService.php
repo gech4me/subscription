@@ -18,11 +18,12 @@ class SubscriptionService
     public function storeSubscription(array $data): DefaultResource
     {
         $website = $this->repository->find($data['website_id']);
+
         $subscriber = Subscriber::firstOrCreate([
             'email' => $data['email']
         ]);
 
-        $website->subscribers()->save($subscriber);
+        $website->subscribers()->attach($subscriber->id);
 
         return new DefaultResource($subscriber);
     }
