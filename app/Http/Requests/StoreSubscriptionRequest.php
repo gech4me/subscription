@@ -25,7 +25,7 @@ class StoreSubscriptionRequest extends FormRequest
     {
         return [
             'email' => 'required|email|unique:subscribers,email',
-            'websites' => 'required|array'
+            'website_id' => 'required|integer'
         ];
     }
 }

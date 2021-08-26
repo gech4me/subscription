@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Subscription;
 
 use App\Facade\Subscription\SubscriptionServiceFacade;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
+use App\Http\Requests\StoreSubscriptionRequest;
+use App\Http\Requests\UpdateSubscriptionRequest;
 
 class SubscriptionController extends Controller
 {
@@ -15,11 +15,11 @@ class SubscriptionController extends Controller
         return SubscriptionServiceFacade::getSubscriptions($email);
     }
 
-    public function store(StorePostRequest $request)
+    public function store(StoreSubscriptionRequest $request)
     {
         return SubscriptionServiceFacade::storeSubscription($request->only([
             'email',
-            'websites'
+            'website_id'
         ]));
     }
 
@@ -28,7 +28,7 @@ class SubscriptionController extends Controller
         return SubscriptionServiceFacade::showSubscription($id);
     }
 
-    public function update(UpdatePostRequest $request, $email)
+    public function update(UpdateSubscriptionRequest $request, $email)
     {
         return SubscriptionServiceFacade::updateSubscription($request->only([
             'websites'
