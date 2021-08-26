@@ -2,7 +2,9 @@
 
 namespace App\Services\Subscription;
 
+use App\Events\SendSubscriptionPostEmail;
 use App\Http\Resources\DefaultResource;
+use App\Jobs\ProcessSubscriptionJob;
 use App\Repositories\Eloquent\PostRepository;
 
 class PostService
@@ -17,6 +19,8 @@ class PostService
     public function storePost($data): DefaultResource
     {
         $post = $this->repository->create($data);
+
+        ProcessSubscriptionJob::dispatch($post);
 
         return new DefaultResource($post);
     }
